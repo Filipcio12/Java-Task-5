@@ -6,32 +6,32 @@ import java.util.Scanner;
 import java.util.List;
 
 public class IO {
-    String[] data;
-
-    public void readFile(String filePath) {
+    public static String[] readFile(String filePath) {
+        String[] data = new String[0];
         String text = "";
-        File file = new File(filePath);
         try {
+            File file = new File(filePath);
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
                 text += scanner.nextLine() + "\n";
             }
             text = text.substring(0, text.length() - 1);
             scanner.close();
-            data = text.split("\n");   
+            data = text.split("\n");
         }
         catch (FileNotFoundException ex) {
             System.out.println("File not found.");
         }
+        return data;
     }
 
-    public void writeFile(String filePath, List<MyData> myDatas) {
+    public static void writeFile(String filePath, List<Date> dates) {
         File file = new File(filePath);
         try {
             file.createNewFile();
             FileWriter writer = new FileWriter(filePath);
-            for (MyData myData : myDatas) {
-                writer.write(myData + "\n");
+            for (Date date : dates) {
+                writer.write(date + "\n");
             }
             writer.close();
         }
