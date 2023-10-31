@@ -3,8 +3,6 @@ import java.util.regex.Pattern;
 
 public class DateConverter {
     public static Date convertDate(String dateString) {
-        Date date = new Date();
-
         String[] dateFormats = {
             "^\\d{2}/\\d{1,2}/\\d{4} [A-Za-z]+$",   // dd/mm/yyyy weekday
             "^[A-Za-z]+ \\d{2}/\\d{1,2}/\\d{4}$",   // weekday dd/mm/yyyy
@@ -23,6 +21,11 @@ public class DateConverter {
             }
         }
 
+        return parseDate(formatIndex, dateString);
+    }
+
+    private static Date parseDate(int formatIndex, String dateString) {
+        Date date = new Date();
         if (formatIndex == 0) {
             String[] dandy = dateString.split(" ");
             String[] dateArr = dandy[0].split("/");

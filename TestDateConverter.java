@@ -1,13 +1,20 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Collections;
 
 class TestDateConverter {
     public static void main(String[] args) {
-        // IO
-        // Date
-        // Converting
-        String data[] = IO.readFile("InputData.txt");
+        String[] data = null;
+
+        try {
+            data = IO.readFile("InputData.txt");
+        }
+        catch (FileNotFoundException ex) {
+            System.out.println("File not found.");
+            return;
+        }
 
         List<Date> dates = new ArrayList<Date>();
 
@@ -27,6 +34,8 @@ class TestDateConverter {
         for (int i = 1; i < dates.size(); ++i) {
             if (!dates.get(i).equals(dates.get(i - 1))) {
                 newDates.add(dates.get(i));
+            }
+            else {
                 numOfRewrites++;
             }
         }
@@ -35,6 +44,12 @@ class TestDateConverter {
 
         System.out.println(numOfRewrites);
 
-        IO.writeFile("OutputData.txt", dates);
+        try {
+            IO.writeFile("OutputData.txt", dates);
+        }
+        catch (IOException ex) {
+            System.out.println("Error writing into the file.");
+        }
+        
     }
 }
