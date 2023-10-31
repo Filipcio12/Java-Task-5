@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Collections;
 
-class Main {
+class TestDateConverter {
     public static void main(String[] args) {
         // IO
         // Date
