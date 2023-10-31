@@ -6,10 +6,9 @@ import java.util.Scanner;
 import java.util.List;
 
 public class IO {
-    public static String[] readFile(String filePath) {
-        String[] data = new String[0];
-        String text = "";
+    public static String[] readFile(String filePath) throws FileNotFoundException {
         try {
+            String text = "";
             File file = new File(filePath);
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
@@ -17,17 +16,17 @@ public class IO {
             }
             text = text.substring(0, text.length() - 1);
             scanner.close();
-            data = text.split("\n");
+            String[] data = text.split("\n");
+            return data;
         }
         catch (FileNotFoundException ex) {
-            System.out.println("File not found.");
+            throw ex;
         }
-        return data;
     }
 
-    public static void writeFile(String filePath, List<Date> dates) {
-        File file = new File(filePath);
+    public static void writeFile(String filePath, List<Date> dates) throws IOException {
         try {
+            File file = new File(filePath);
             file.createNewFile();
             FileWriter writer = new FileWriter(filePath);
             for (Date date : dates) {
@@ -36,7 +35,7 @@ public class IO {
             writer.close();
         }
         catch (IOException ex) {
-            System.out.println("Failed to create a file");
+            throw ex;
         }
     }
 }
