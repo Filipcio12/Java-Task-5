@@ -25,10 +25,15 @@ public class Date implements Comparable<Date> {
         );
     }
 
+    @Override
     public int compareTo(Date oDate) {
-        return(
-            oDate.year - year + (oDate.month - month) / 12 + (oDate.day - day) / 365
-        );
+        if (this.year != oDate.year) {
+            return this.year - oDate.year;
+        }
+        if (this.month != oDate.month) {
+            return this.month - oDate.month;
+        }
+        return this.day - oDate.day;
     }
 
     public String toString() {
